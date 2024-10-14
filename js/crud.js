@@ -38,7 +38,7 @@ export const bookDisplay = () => {
     decRateBtn.innerText = "-";
     decRateBtn.setAttribute("class", "rate-btn");
     decRateBtn.setAttribute("id", "dec-rate-btn");
-    decBtn.addEventListener("click", decRate);
+    decRateBtn.addEventListener("click", decRate);
 
     rateDiv.appendChild(decRateBtn);
 
@@ -51,11 +51,11 @@ export const bookDisplay = () => {
     incRateBtn.innerText = "+";
     incRateBtn.setAttribute("class", "rate-btn");
     incRateBtn.setAttribute("id", "inc-rate-btn");
-    incBtn.addEventListener("click", incRate);
+    incRateBtn.addEventListener("click", incRate);
 
     rateDiv.appendChild(incRateBtn);
 
-    
+
 
 
     wrapper.appendChild(rateDiv);
@@ -135,18 +135,21 @@ export const bookDisplayForUpdate = () => {
     title.setAttribute("type", "text");
     title.value = book.title;
     title.setAttribute("class", "display-title");
+    title.setAttribute("class", "form-control");
     wrapper.appendChild(title);
 
     let author = document.createElement("input");
     author.setAttribute("type", "text");
     author.value = book.author;
     author.setAttribute("class", "display-author");
+    title.setAttribute("class", "form-control");
     wrapper.appendChild(author);
 
     let price = document.createElement("input");
     price.setAttribute("type", "number");
     price.value = book.price;
     price.setAttribute("class", "display-price");
+    title.setAttribute("class", "form-control");
     wrapper.appendChild(price);
 
     let rateDiv = document.createElement("div");
@@ -156,6 +159,8 @@ export const bookDisplayForUpdate = () => {
     decRateBtn.innerText = "-";
     decRateBtn.setAttribute("class", "rate-btn");
     decRateBtn.setAttribute("id", "dec-rate-btn");
+    decRateBtn.addEventListener("click", decRate);
+
     rateDiv.appendChild(decRateBtn);
 
     let rate = document.createElement("h4");
@@ -167,6 +172,8 @@ export const bookDisplayForUpdate = () => {
     incRateBtn.innerText = "+";
     incRateBtn.setAttribute("class", "rate-btn");
     incRateBtn.setAttribute("id", "inc-rate-btn");
+    incRateBtn.addEventListener("click", incRate);
+
     rateDiv.appendChild(incRateBtn);
 
     wrapper.appendChild(rateDiv);
@@ -180,33 +187,132 @@ export const bookDisplayForUpdate = () => {
 
     body.appendChild(wrapper);
 
-    // Add events for increment/decrement of rate
-    incRateBtn.addEventListener("click", incRate);
-    decRateBtn.addEventListener("click", decRate);
-
-    // Add event for saving changes
+    //אירוע לשמירת שינויים
     saveBtn.addEventListener("click", () => {
-        // Update book details
+
         book.title = title.value;
         book.author = author.value;
-        book.price = parseFloat(price.value); // Convert price input to a number
+        book.price = parseFloat(price.value);
 
-        // Update book in localStorage
+        // קבלת המידע מהלוקל סטורג
         let bookArr = JSON.parse(localStorage.getItem("books"));
         let item = bookArr.find(item => item.id == book.id);
 
         if (item) {
-            // Merge the updated book data into the original book object
+            // ממזג את המידע החדש לתוך האובייקט
             Object.assign(item, { title: book.title, author: book.author, price: book.price });
         }
 
-        // Save the updated book back to localStorage
+        // שמירת השיוניים בלוקל סטורג
         localStorage.setItem("books", JSON.stringify(bookArr));
         localStorage.setItem("dispBook", JSON.stringify(item));
-        bookDisplay();
         alert("Book details updated!");
-        window.location.reload
+        window.location.reload()
     });
 }
 
+//פונקציה שיוצרת דיאלוג של טופס הוספת ספר חדש
+export const openAddBookDialog = () => {
+    let dialog = document.createElement("dialog");
+    dialog.setAttribute("id", "add-book-dialog");
 
+    let form = document.createElement("form");
+    form.setAttribute("method", "dialog");
+    form.setAttribute("id", "add-book-form");
+
+    // Title input
+    let titleLabel = document.createElement("label");
+    titleLabel.innerText = "Book Title:";
+    let titleInput = document.createElement("input");
+    titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("id", "book-title");
+    titleInput.setAttribute("required", "true");
+    form.appendChild(titleLabel);
+    form.appendChild(titleInput);
+    // Author input
+    let authorLabel = document.createElement("label");
+    authorLabel.innerText = "Author:";
+    let authorInput = document.createElement("input");
+    authorInput.setAttribute("type", "text");
+    authorInput.setAttribute("id", "book-author");
+    authorInput.setAttribute("required", "true");
+    form.appendChild(authorLabel);
+    form.appendChild(authorInput);
+    // Price input
+    let priceLabel = document.createElement("label");
+    priceLabel.innerText = "Price (₪):";
+    let priceInput = document.createElement("input");
+    priceInput.setAttribute("type", "number");
+    priceInput.setAttribute("id", "book-price");
+    priceInput.setAttribute("required", "true");
+    form.appendChild(priceLabel);
+    form.appendChild(priceInput);
+    // Rate input
+    let rateLabel = document.createElement("label");
+    rateLabel.innerText = "Rate (1-10):";
+    let rateInput = document.createElement("input");
+    rateInput.setAttribute("type", "number");
+    rateInput.setAttribute("id", "book-rate");
+    rateInput.setAttribute("min", "1");
+    rateInput.setAttribute("max", "10");
+    rateInput.setAttribute("required", "true");
+    form.appendChild(rateLabel);
+    form.appendChild(rateInput);
+    // Image input (file upload)
+    let imgLabel = document.createElement("label");
+    imgLabel.innerText = "Upload Book Image:";
+    let imgInput = document.createElement("input");
+    imgInput.setAttribute("type", "file");
+    imgInput.setAttribute("id", "book-img");
+    imgInput.setAttribute("accept", "image/*");
+    form.appendChild(imgLabel);
+    form.appendChild(imgInput);
+    // Submit button
+    let submitBtn = document.createElement("button");
+    submitBtn.innerText = "Add Book";
+    submitBtn.setAttribute("type", "submit");
+
+    form.appendChild(submitBtn);
+    dialog.appendChild(form);
+    document.body.appendChild(dialog);
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Read input values
+        const title = document.getElementById("book-title").value;
+        const author = document.getElementById("book-author").value;
+        const price = parseFloat(document.getElementById("book-price").value);
+        const rate = parseInt(document.getElementById("book-rate").value);
+        const imgFile = document.getElementById("book-img").files[0];
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const img = reader.result;
+            let bookArr = JSON.parse(localStorage.getItem("books")) || [];
+            // Create a new book object
+            let newBook = {
+                id: bookArr.length + 1, // New book ID (incremental)
+                title: title,
+                author: author,
+                price: price,
+                rate: rate,
+                img: imgBase64, // Store the image as base64 string
+            };
+            bookArr.push(newBook);
+            localStorage.setItem("books", JSON.stringify(bookArr));
+            dialog.close();
+            form.reset();
+            alert("Book added successfully!");
+            if (imgFile) {
+                reader.readAsDataURL(imgFile);
+            } else {
+                reader.onload();
+            }
+            dialog.showModal();
+            
+        }
+
+    })
+
+}

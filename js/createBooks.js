@@ -1,5 +1,5 @@
 import jsonBooks from "../data/books.json" with {type: "json"};
-import { bookDisplay, bookDisplayForUpdate } from "../js/crud.js";
+import { bookDisplay, bookDisplayForUpdate,openAddBookDialog } from "../js/crud.js";
 let bookArr = JSON.parse(localStorage.getItem("books"));
 if(!bookArr||bookArr==[]){
 bookArr = jsonBooks["books"];
@@ -74,9 +74,11 @@ const createBookList = () => {
     deleteBtn.addEventListener("click", () => {
       deleteBook(bookArr[i].id);
       tr.remove();
+      let dispBook=JSON.parse(localStorage.getItem("dispBook"));
+      if(dispBook.id==bookArr[i].id){
       localStorage.removeItem("dispBook")
       let display=document.getElementById("display-wrapper");
-      display.remove();
+      display.remove();}
     })
     tr.appendChild(deleteBtn);
 
@@ -87,8 +89,8 @@ const createBookList = () => {
 window.addEventListener("load", createBookList)
 // אירועי לחיצה על פעולות
 //יציגו את הפונקציה הבאה:
-
-
+let addBookBtn=document.getElementById("add-book-btn")
+addBookBtn.addEventListener("click",openAddBookDialog)
 window.addEventListener("load", ()=>{
   let item=JSON.parse(localStorage.getItem("dispBook"));
  if(item){
@@ -126,19 +128,19 @@ const updateBook = (bookId) => {
 
 
 //לייצור אירוע של טריגר של הלוקלסטורג
-function setItemWithEvent(key, value) {
-  localStorage.setItem(key, value);
-  // Dispatch a custom event when localStorage is updated
-  const event = new Event('localStorageUpdated');
-  window.dispatchEvent(event);
-}
+// function setItemWithEvent(key, value) {
+//   localStorage.setItem(key, value);
+//   // Dispatch a custom event when localStorage is updated
+//   const event = new Event('localStorageUpdated');
+//   window.dispatchEvent(event);
+// }
 
-// Listener for custom localStorage change event
-window.addEventListener('localStorageUpdated', function () {
-  console.log('localStorage was updated in the same tab!');
-});
+// // Listener for custom localStorage change event
+// window.addEventListener('localStorageUpdated', function () {
+//   console.log('localStorage was updated in the same tab!');
+// });
 
-// Example usage
-setItemWithEvent('exampleKey', 'exampleValue');
+// // Example usage
+// setItemWithEvent('exampleKey', 'exampleValue');
 
 
