@@ -2,7 +2,7 @@
 export const bookDisplay = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
 
-    let body = document.getElementById("body");
+    let container = document.getElementById("container");
     let oldBookDisplay = document.getElementById("display-wrapper");
     if (oldBookDisplay) {
         oldBookDisplay.remove();
@@ -43,8 +43,8 @@ export const bookDisplay = () => {
     rateDiv.appendChild(decRateBtn);
 
     let rate = document.createElement("h4");
-    price.innerText = book.rate;
-    price.setAttribute("id", "rate-content");
+    rate.innerText = book.rate;
+    rate.setAttribute("id", "rate-content");
     rateDiv.appendChild(rate);
 
     let incRateBtn = document.createElement("button");
@@ -60,7 +60,7 @@ export const bookDisplay = () => {
 
     wrapper.appendChild(rateDiv);
 
-    body.appendChild(wrapper);
+    container.appendChild(wrapper);
 
 }
 
@@ -114,7 +114,7 @@ export const decRate = () => {
 export const bookDisplayForUpdate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     console.log("in function");
-    let body = document.getElementById("body");
+    let container = document.getElementById("container");
     let oldBookDisplay = document.getElementById("display-wrapper");
     if (oldBookDisplay) {
         oldBookDisplay.remove();
@@ -185,7 +185,7 @@ export const bookDisplayForUpdate = () => {
     saveBtn.setAttribute("class", "btn");
     wrapper.appendChild(saveBtn);
 
-    body.appendChild(wrapper);
+    container.appendChild(wrapper);
 
     //אירוע לשמירת שינויים
     saveBtn.addEventListener("click", () => {
@@ -271,48 +271,54 @@ export const openAddBookDialog = () => {
     let submitBtn = document.createElement("button");
     submitBtn.innerText = "Add Book";
     submitBtn.setAttribute("type", "submit");
-
     form.appendChild(submitBtn);
+
     dialog.appendChild(form);
     document.body.appendChild(dialog);
+    dialog.showModal();
 
     form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        // Read input values
-        const title = document.getElementById("book-title").value;
-        const author = document.getElementById("book-author").value;
-        const price = parseFloat(document.getElementById("book-price").value);
-        const rate = parseInt(document.getElementById("book-rate").value);
-        const imgFile = document.getElementById("book-img").files[0];
+    // קריאת ערכי הטופס
+    const title = document.getElementById("book-title").value;
+    const author = document.getElementById("book-author").value;
+    const price = parseFloat(document.getElementById("book-price").value);
+    const rate = parseInt(document.getElementById("book-rate").value);
+    const imgFile = document.getElementById("book-img").files[0];
 
+    // פונקציה להוספת הספר החדש
+    const addBook = (imgBase64 = null) => {
+        let bookArr = JSON.parse(localStorage.getItem("books")) || [];
+        // יצירת אובייקט ספר חדש
+        let newBook = {
+            id: bookArr.length + 1, // מזהה ספר חדש
+            title: title,
+            author: author,
+            price: price,
+            rate: rate,
+            img: imgBase64, // תמונה כ-Base64 אם קיימת
+        };
+        bookArr.push(newBook);
+        localStorage.setItem("books", JSON.stringify(bookArr));
+        dialog.close();
+        form.reset();
+        alert("Book added successfully!");
+        window.location.reload();
+    };
+
+    // קריאת הקובץ אם קיים, אחרת קריאה להוספת הספר ללא תמונה
+    if (imgFile) {
         const reader = new FileReader();
         reader.onload = () => {
-            const img = reader.result;
-            let bookArr = JSON.parse(localStorage.getItem("books")) || [];
-            // Create a new book object
-            let newBook = {
-                id: bookArr.length + 1, // New book ID (incremental)
-                title: title,
-                author: author,
-                price: price,
-                rate: rate,
-                img: imgBase64, // Store the image as base64 string
-            };
-            bookArr.push(newBook);
-            localStorage.setItem("books", JSON.stringify(bookArr));
-            dialog.close();
-            form.reset();
-            alert("Book added successfully!");
-            if (imgFile) {
-                reader.readAsDataURL(imgFile);
-            } else {
-                reader.onload();
-            }
-            dialog.showModal();
-            
-        }
+            const imgBase64 = reader.result;
+            addBook(imgBase64);
+        };
+        reader.readAsDataURL(imgFile);
+    } else {
+        addBook(); // הוספה ללא תמונה
+    }
+});
 
-    })
 
 }
