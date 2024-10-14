@@ -64,27 +64,31 @@ export const bookDisplay = () => {
 
 }
 
-
-
-
-
 //העלאת דירוג
 
 export const incRate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     let bookArr = JSON.parse(localStorage.getItem("books"));
 
-    let item = bookArr.find(item => item.id == book.id);
-    if (item && item.rate < 10) {
-        //ממזג שינויים בתוך אובייקט
-        Object.assign(item, { rate: book.rate + 1 });
-    }
+    // יצירת מערך חדש תוך עדכון ה-rate של הספר המתאים
+    let updatedBookArr = bookArr.map(item => {
+        if (item.id == book.id && item.rate < 10) {
+            return { ...item, rate: item.rate + 1 }; // עדכון ה-rate של הספר
+        }
+        return item; // השארת שאר הספרים ללא שינוי
+    });
 
-    localStorage.setItem("dispBook", JSON.stringify(item));
-    localStorage.setItem("books", JSON.stringify(bookArr));
+    // עדכון הספר המוצג בלוקל סטורג' עם הנתונים החדשים
+    let updatedBook = updatedBookArr.find(item => item.id == book.id);
+    localStorage.setItem("dispBook", JSON.stringify(updatedBook));
+
+    // שמירת המערך החדש בלוקל סטורג'
+    localStorage.setItem("books", JSON.stringify(updatedBookArr));
+
+    // עדכון התצוגה של ה-rate בעמוד
     let rate = document.getElementById("rate-content");
-    rate.innerText = item.rate;
-}
+    rate.innerText = updatedBook.rate;
+};
 
 //הורדת דירוג
 
@@ -93,18 +97,25 @@ export const decRate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     let bookArr = JSON.parse(localStorage.getItem("books"));
 
-    let item = bookArr.find(item => item.id == book.id);
-    if (item && item.rate > 0) {
-        //ממזג שינויים בתוך אובייקט
-        Object.assign(item, { rate: book.rate - 1 });
+    // יצירת מערך חדש תוך עדכון ה-rate של הספר המתאים
+    let updatedBookArr = bookArr.map(item => {
+        if (item.id == book.id && item.rate > 0) {
+            return { ...item, rate: item.rate - 1 }; // עדכון ה-rate של הספר
+        }
+        return item; // השארת שאר הספרים ללא שינוי
+    });
 
-    }
+    // עדכון הספר המוצג בלוקל סטורג' עם הנתונים החדשים
+    let updatedBook = updatedBookArr.find(item => item.id == book.id);
+    localStorage.setItem("dispBook", JSON.stringify(updatedBook));
 
-    localStorage.setItem("dispBook", JSON.stringify(item));
-    localStorage.setItem("books", JSON.stringify(bookArr));
+    // שמירת המערך החדש בלוקל סטורג'
+    localStorage.setItem("books", JSON.stringify(updatedBookArr));
+
+    // עדכון התצוגה של ה-rate בעמוד
     let rate = document.getElementById("rate-content");
-    rate.innerText = item.rate;
-}
+    rate.innerText = updatedBook.rate;
+};
 
 
 
@@ -215,10 +226,21 @@ export const bookDisplayForUpdate = () => {
 export const openAddBookDialog = () => {
     let dialog = document.createElement("dialog");
     dialog.setAttribute("id", "add-book-dialog");
+ 
+ // Create close button (X)
+ let closeBtn = document.createElement("button");
+ closeBtn.innerText = "×"; // The "X" symbol
+ closeBtn.setAttribute("id", "close-btn");
+ closeBtn.addEventListener("click", () => {
+     dialog.close(); // Close the dialog when "X" is clicked
+     dialog.remove(); // Remove dialog from the DOM after closing
+ });
 
     let form = document.createElement("form");
     form.setAttribute("method", "dialog");
     form.setAttribute("id", "add-book-form");
+ 
+    dialog.appendChild(closeBtn);
 
     // Title input
     let titleLabel = document.createElement("label");

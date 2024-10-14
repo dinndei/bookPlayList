@@ -1,52 +1,237 @@
-body{
+body {
     height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-#header{
-    background-color: rgb(50, 50, 50);
-    height: 10%;
+
+#header {
+    /* background-color: rgb(50, 50, 50); */
+    /* height: 10%; */
     width: 100%;
     display: flex;
     align-items: center;
-    
+    /* margin-bottom: 10%; */
+    position: relative;
+    height: 320px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-#add-book-btn{
-    margin-left: 2%;
+
+#header svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
 }
-#container{
+
+#add-book-btn {
+    z-index: 1;
+    /* Ensures the button is on top of the SVG */
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgb(255, 87, 34);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-book-btn:hover {
+    background-color: rgb(230, 74, 25);
+}
+
+#container {
     display: flex;
     flex-direction: row;
-    min-height: 80vh  
+    min-height: 80vh;
+    padding: 20px;
 }
-#table{
+
+#table {
     width: 65%;
     margin-left: 2%;
     margin-right: 1%;
-}
-#display-wrapper{
-    background-color: aquamarine;
-    float: right;
-    width: 30%;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     
+}
+
+#display-wrapper {
+
+    float: right;
+    width: 40%;
+    padding: 5%;
+    padding-right: 7%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    background-color: #fff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
 }
-.rate-wrap{
+
+.display-id {
+    font-size: 18px;
+    color: #666;
+}
+
+.display-title {
+    font-size: 24px;
+    color: #273055;
+    /* Darker color for titles */
+    margin-bottom: 10px;
+}
+
+.display-author {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.display-price {
+    font-size: 20px;
+    color: #27ae60;
+    /* Price in green */
+    margin-bottom: 15px;
+}
+
+.rate-wrap {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
 }
-#rate-content{
-padding: 20px;
+
+.rate-btn {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-.rate-btn{
-    
+
+.rate-btn:hover {
+    background-color: #e64a19;
 }
-#footer{
-    background-color: rgb(244, 244, 244);
+
+#rate-content {
+    font-size: 20px;
+    color: #273055;
+    padding: 20px;
+
+}
+
+#save-btn {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#save-btn:hover {
+    background-color: #229954;
+}
+#close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#close-btn:hover {
+    color: #ff5722;
+}
+#add-book-dialog {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    border: none;
+}
+
+#add-book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 16px;
+    color: #273055;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: #273055;
+    box-shadow: 0 0 5px rgba(39, 48, 85, 0.5);
+}
+
+button[type="submit"] {
+    padding: 10px 15px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #e64a19;
+}
+
+#footer {
+
     height: 20%;
     width: 100%;
     position: relative;
     bottom: 0;
-    
-}
-.footer-txt{
 
 }
+
+.footer-txt {}
