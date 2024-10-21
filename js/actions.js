@@ -1,4 +1,4 @@
-//מקבל ספר ומציג בצורה דינמית 
+//מקבל ספר ומציג אותו בצד בכרטיס בצורה דינמית 
 export const bookDisplay = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
 
@@ -7,7 +7,7 @@ export const bookDisplay = () => {
     if (oldBookDisplay) {
         oldBookDisplay.remove();
     }
-    // יצירת כרטיס ספר
+    // יצירת כרטיס הספר
 
     let wrapper = document.createElement("div");
     wrapper.setAttribute("id", "display-wrapper");
@@ -67,7 +67,7 @@ export const bookDisplay = () => {
     container.appendChild(wrapper);
 
 }
-// Increase rate function
+// מגדיל את הדירוג ב1
 export const incRate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     let bookArr = JSON.parse(localStorage.getItem("books"));
@@ -91,7 +91,7 @@ export const incRate = () => {
     rate.innerText = updatedBook.rate;
 };
 
-// Decrease rate function
+// מקטין את הדירוג ב1
 export const decRate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     let bookArr = JSON.parse(localStorage.getItem("books"));
@@ -339,6 +339,8 @@ export const openAddBookDialog = () => {
 
 }
 
+//פונקציות למיון הטבלה, כל פונקציה ע"פ ערך מסוים
+//מיון עולה ע"פ שם ספר
 export const sortAscTitle=()=>{
     let bookArr= JSON.parse(localStorage.getItem("books"));
     bookArr.sort((a,b)=>a.title.localeCompare(b.title));
@@ -347,7 +349,7 @@ export const sortAscTitle=()=>{
    const event = new Event('localStorageUpdated');
    window.dispatchEvent(event);
 }
-
+//מיון יורד ע"פ שם ספר
 export const sortDescTitle=()=>{
     let bookArr= JSON.parse(localStorage.getItem("books"));
     bookArr.sort((a,b)=>b.title.localeCompare(a.title));
@@ -356,7 +358,7 @@ export const sortDescTitle=()=>{
     const event = new Event('localStorageUpdated');
     window.dispatchEvent(event);
 }
-
+//מיון עולה ע"פ מחיר
 export const sortAscPrice=()=>{
     let bookArr= JSON.parse(localStorage.getItem("books"));
     bookArr.sort((a,b)=>a.price-b.price);
@@ -365,7 +367,7 @@ export const sortAscPrice=()=>{
     const event = new Event('localStorageUpdated');
     window.dispatchEvent(event);
 }
-
+//מיון יורד ע"פ מחיר
 export const sortDescPrice=()=>{
     let bookArr= JSON.parse(localStorage.getItem("books"));
     bookArr.sort((a,b)=>b.price-a.price);
@@ -375,6 +377,7 @@ export const sortDescPrice=()=>{
     window.dispatchEvent(event);
 }
 
+//הוספת אירועי לחיצה לכפתורי המיון וקריאה לפונקציית המיון בעת הלחיצה
 let btnSortAscPrice=document.getElementById("sort-asc");
 btnSortAscPrice.addEventListener("click",sortAscPrice);
 let btnSortDescPrice=document.getElementById("sort-desc");
@@ -384,7 +387,7 @@ btnSortAscString.addEventListener("click",sortAscTitle);
 let btnSortDescString=document.getElementById("sort-desc-string");
 btnSortDescString.addEventListener("click",sortDescTitle);
 
-// Listener for custom localStorage change event
+//הוספת האזנה לעדכון הלוקל סטורג וטעינה מחדש של הדף בעת העדכון
 window.addEventListener('localStorageUpdated', ()=>{
     window.location.reload();
 });

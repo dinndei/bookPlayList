@@ -62,12 +62,7 @@ body {
     border-radius: 10px;
     
 }
-#book-title-tr{
-    /* display: flex;
-    flex-direction: row;
-    gap:5%;
-    height: 100%; */
-}
+
 
 #display-wrapper {
 
@@ -249,4 +244,3 @@ button[type="submit"]:hover {
 
 }
 
-.footer-txt {}

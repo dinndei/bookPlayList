@@ -1,16 +1,7 @@
 import jsonBooks from "../data/books.json" with {type: "json"};
 import { bookDisplay, bookDisplayForUpdate, openAddBookDialog } from "./actions.js";
-window.addEventListener("load", () => {
-  let bookArr = JSON.parse(localStorage.getItem("books"));
-  if (!bookArr || bookArr == []) {
-    bookArr = jsonBooks["books"];
-    localStorage.setItem("books", JSON.stringify(bookArr));
-  }
-  
- 
-})
-//מקבל רשימת ספרים ומציג אותה בצורה דינמית 
 
+//מקבל רשימת ספרים ומציג אותה בצורה דינמית 
 const createBookList = () => {
   let bookArr = JSON.parse(localStorage.getItem("books"));
 
@@ -94,31 +85,39 @@ const createBookList = () => {
 
   }
 }
-window.addEventListener("load", createBookList)
-// אירועי לחיצה על פעולות
-//יציגו את הפונקציה הבאה:
-let addBookBtn = document.getElementById("add-book-btn")
-addBookBtn.addEventListener("click", openAddBookDialog)
+
+//בעת טעינת הדף:
+//הכנסת המערך מהלוקל סטורג או מקובץ הדאטה למשתנה
+//קריאה לפונקציות ליצירת טבלת הספרים וכרטיס הספר המוצג
 window.addEventListener("load", () => {
+  let bookArr = JSON.parse(localStorage.getItem("books"));
+  if (!bookArr || bookArr == []) {
+    bookArr = jsonBooks["books"];
+    localStorage.setItem("books", JSON.stringify(bookArr));
+  }
+  
+  createBookList();
   let item = JSON.parse(localStorage.getItem("dispBook"));
   if (item) {
     bookDisplay();
   }
 });
 
+// אירועי לחיצה על פעולות
 
-//פונקציות להפעלה בעת אירוע
+//אירוע הוספת ספר ע"ילחיצה על כפתור הוספת ספר
+let addBookBtn = document.getElementById("add-book-btn")
+addBookBtn.addEventListener("click", openAddBookDialog)
 
-//הוספת ספר למערך
 
-//מחיקת ספר ממערך
+//פונקציה למחיקת ספר ממערך
 const deleteBook = (bookId) => {
   bookArr = JSON.parse(localStorage.getItem("books"));
   let newBookArr = bookArr.filter(item => item.id != bookId);
   localStorage.setItem("books", JSON.stringify(newBookArr));
 
 }
-//עריכת ספר במערך
+//פונקציה לעריכת ספר במערך
 const updateBook = (bookId) => {
   bookArr = JSON.parse(localStorage.getItem("books"));
   let item = bookArr.find(item => item.id == bookId);
