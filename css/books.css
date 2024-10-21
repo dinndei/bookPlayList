@@ -62,6 +62,12 @@ body {
     border-radius: 10px;
     
 }
+#book-title-tr{
+    /* display: flex;
+    flex-direction: row;
+    gap:5%;
+    height: 100%; */
+}
 
 #display-wrapper {
 
@@ -106,6 +112,15 @@ body {
     margin-bottom: 15px;
 }
 
+.book-image {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;
+    margin-bottom: 10px;
+  }
 .rate-wrap {
     display: flex;
     align-items: center;

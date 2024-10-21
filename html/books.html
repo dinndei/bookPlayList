@@ -20,16 +20,24 @@
                 d="M0,256L24,256C48,256,96,256,144,234.7C192,213,240,171,288,170.7C336,171,384,213,432,202.7C480,192,528,128,576,112C624,96,672,128,720,122.7C768,117,816,75,864,85.3C912,96,960,160,1008,202.7C1056,245,1104,267,1152,234.7C1200,203,1248,117,1296,117.3C1344,117,1392,203,1416,245.3L1440,288L1440,0L1416,0C1392,0,1344,0,1296,0C1248,0,1200,0,1152,0C1104,0,1056,0,1008,0C960,0,912,0,864,0C816,0,768,0,720,0C672,0,624,0,576,0C528,0,480,0,432,0C384,0,336,0,288,0C240,0,192,0,144,0C96,0,48,0,24,0L0,0Z">
             </path>
         </svg>
-      
+
     </header>
 
     <div id="container">
         <table id="table" class="table table-striped table-hover table-bordered">
             <tr>
                 <th>id</th>
-                <th>title</th>
+                <th id="book-title-tr">
+                    <div>title</div>
+                    <button id="sort-asc-string">A ▲</button>
+                    <button id="sort-desc-string">Z ▼</button>
+                </th>
                 <th>author</th>
-                <th>price</th>
+                <th>
+                    <div>price</div>
+                    <button id="sort-asc">1 ▲</button>
+                    <button id="sort-desc">9 ▼</button>
+                </th>
                 <th colspan="3">actions</th>
             </tr>
 

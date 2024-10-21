@@ -1,165 +1,148 @@
 {
-    "books": [
-      {
-        "id": 1,
-        "title": "The Great Gatsby",
-        "author": "F. Scott Fitzgerald",
-        "price": 10.99,
-        "rate": 4,
-        "image": "https://example.com/images/the-great-gatsby.jpg"
-      },
-      {
-        "id": 2,
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
-        "price": 8.99,
-        "rate": 4,
-        "image": "https://example.com/images/to-kill-a-mockingbird.jpg"
-      },
-      {
-        "id": 3,
-        "title": "1984",
-        "author": "George Orwell",
-        "price": 9,
-        "rate": 4.7,
-        "image": "https://example.com/images/1984.jpg"
-      },
-      {
-        "id": 4,
-        "title": "Pride and Prejudice",
-        "author": "Jane Austen",
-        "price": 6.99,
-        "rate": 4,
-        "image": "https://example.com/images/pride-and-prejudice.jpg"
-      },
-      {
-        "id": 5,
-        "title": "The Catcher in the Rye",
-        "author": "J.D. Salinger",
-        "price": 7.49,
-        "rate": 4,
-        "image": "https://example.com/images/the-catcher-in-the-rye.jpg"
-      },
-      {
-        "id": 6,
-        "title": "The Hobbit",
-        "author": "J.R.R. Tolkien",
-        "price": 12.99,
-        "rate": 6,
-        "image": "https://example.com/images/the-hobbit.jpg"
-      },
-      {
-        "id": 7,
-        "title": "Mobyxxxxx",
-        "author": "Herman Melville",
-        "price": 11.49,
-        "rate": 7,
-        "image": "https://example.com/images/moby-dick.jpg"
-      },
-      {
-        "id": 8,
-        "title": "War and Peace",
-        "author": "Leo Tolstoy",
-        "price": 13.99,
-        "rate": 1,
-        "image": "https://example.com/images/war-and-peace.jpg"
-      },
-      {
-        "id": 9,
-        "title": "The Odyssey",
-        "author": "Homer",
-        "price": 10.49,
-        "rate": 8,
-        "image": "https://example.com/images/the-odyssey.jpg"
-      },
-      {
-        "id": 10,
-        "title": "Ulysses",
-        "author": "James Joyce",
-        "price": 14.99,
-        "rate": 3,
-        "image": "https://example.com/images/ulysses.jpg"
-      },
-      {
-        "id": 11,
-        "title": "Crime and Punishment",
-        "author": "Fyodor Dostoevsky",
-        "price": 9.99,
-        "rate": 2,
-        "image": "https://example.com/images/crime-and-punishment.jpg"
-      },
-      {
-        "id": 12,
-        "title": "Brave New World",
-        "author": "Aldous Huxley",
-        "price": 8.99,
-        "rate": 6,
-        "image": "https://example.com/images/brave-new-world.jpg"
-      },
-      {
-        "id": 13,
-        "title": "Jane Eyre",
-        "author": "Charlotte Brontë",
-        "price": 7.99,
-        "rate":7,
-        "image": "https://example.com/images/jane-eyre.jpg"
-      },
-      {
-        "id": 14,
-        "title": "The Divine Comedy",
-        "author": "Dante Alighieri",
-        "price": 12.49,
-        "rate": 7,
-        "image": "https://example.com/images/the-divine-comedy.jpg"
-      },
-      {
-        "id": 15,
-        "title": "Anna Karenina",
-        "author": "Leo Tolstoy",
-        "price": 11.99,
-        "rate": 4,
-        "image": "https://example.com/images/anna-karenina.jpg"
-      },
-      {
-        "id": 16,
-        "title": "Wuthering Heights",
-        "author": "Emily Brontë",
-        "price": 6.49,
-        "rate": 2,
-        "image": "https://example.com/images/wuthering-heights.jpg"
-      },
-      {
-        "id": 17,
-        "title": "Les Misérables",
-        "author": "Victor Hugo",
-        "price": 13.49,
-        "rate": 8,
-        "image": "https://example.com/images/les-miserables.jpg"
-      },
-      {
-        "id": 18,
-        "title": "Don Quixote",
-        "author": "Miguel de Cervantes",
-        "price": 9.49,
-        "rate": 6,
-        "image": "https://example.com/images/don-quixote.jpg"
-      },
-      {
-        "id": 19,
-        "title": "The Iliad",
-        "author": "Homer",
-        "price": 10.49,
-        "rate": 3,
-        "image": "https://example.com/images/the-iliad.jpg"
-      },
-      {
-        "id": 20,
-        "title": "Madame Bovary",
-        "author": "Gustave Flaubert",
-        "price": 7.99,
-        "rate": 1,
-        "image": "https://example.com/images/madame-bovary.jpg"
-      }
-    ]
-  }
-  
+  "books": [
+    {
+      "id": 1,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "price": 10.99,
+      "rate": 4,
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/fs/5315e910834791.560ebecae31ff.jpg"
+    },
+    {
+      "id": 2,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "price": 8.99,
+      "rate": 4,
+      "image": "https://m.media-amazon.com/images/I/51lVvSDLQJL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 3,
+      "title": "1984",
+      "author": "George Orwell",
+      "price": 9,
+      "rate": 4.7,
+      "image": "https://m.media-amazon.com/images/I/71rpa1-kyvL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "price": 6.99,
+      "rate": 4,
+      "image": "https://m.media-amazon.com/images/I/712P0p5cXIL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 5,
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "price": 7.49,
+      "rate": 4,
+      "image": "https://m.media-amazon.com/images/I/8125BDk3l9L._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 6,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "price": 12.99,
+      "rate": 6,
+      "image": "https://m.media-amazon.com/images/I/71jD4jMityL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 8,
+      "title": "War and Peace",
+      "author": "Leo Tolstoy",
+      "price": 13.99,
+      "rate": 1,
+      "image": "https://m.media-amazon.com/images/I/91FXycpulgL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 9,
+      "title": "The Odyssey",
+      "author": "Homer",
+      "price": 10.49,
+      "rate": 8,
+      "image": "https://m.media-amazon.com/images/I/71KynnW9ZjL._AC_UF894,1000_QL80_.jpg"
+    },
+    {
+      "id": 10,
+      "title": "Ulysses",
+      "author": "James Joyce",
+      "price": 14.99,
+      "rate": 3,
+      "image": "https://m.media-amazon.com/images/I/61CohwQxsKL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 11,
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "price": 9.99,
+      "rate": 2,
+      "image": "https://m.media-amazon.com/images/I/A193gO2P8WL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 12,
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "price": 8.99,
+      "rate": 6,
+      "image": "https://upload.wikimedia.org/wikipedia/en/6/62/BraveNewWorld_FirstEdition.jpg"
+    },
+    {
+      "id": 13,
+      "title": "Jane Eyre",
+      "author": "Charlotte Brontë",
+      "price": 7.99,
+      "rate": 7,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Jane_Eyre_title_page.jpg"
+    },
+    {
+      "id": 15,
+      "title": "Anna Karenina",
+      "author": "Leo Tolstoy",
+      "price": 11.99,
+      "rate": 4,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/AnnaKareninaTitle.jpg/800px-AnnaKareninaTitle.jpg"
+    },
+    {
+      "id": 16,
+      "title": "Wuthering Heights",
+      "author": "Emily Brontë",
+      "price": 6.49,
+      "rate": 2,
+      "image": "https://m.media-amazon.com/images/I/81unikMK30L._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 17,
+      "title": "Les Misérables",
+      "author": "Victor Hugo",
+      "price": 13.49,
+      "rate": 8,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/29/CC_No_09_Les_Miserables.JPG"
+    },
+    {
+      "id": 18,
+      "title": "Don Quixote",
+      "author": "Miguel de Cervantes",
+      "price": 9.49,
+      "rate": 6,
+      "image": "https://m.media-amazon.com/images/I/61yifvabpVL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 19,
+      "title": "The Iliad",
+      "author": "Homer",
+      "price": 10.49,
+      "rate": 3,
+      "image": "https://m.media-amazon.com/images/I/91UYfGjbZsL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": 20,
+      "title": "Madame Bovary",
+      "author": "Gustave Flaubert",
+      "price": 7.99,
+      "rate": 1,
+      "image": "https://ih1.redbubble.net/image.3826231514.4342/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+    }
+  ]
+}

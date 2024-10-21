@@ -1,21 +1,24 @@
 import jsonBooks from "../data/books.json" with {type: "json"};
-import { bookDisplay, bookDisplayForUpdate,openAddBookDialog } from "../js/crud.js";
-let bookArr = JSON.parse(localStorage.getItem("books"));
-if(!bookArr||bookArr==[]){
-bookArr = jsonBooks["books"];
-localStorage.setItem("books", JSON.stringify(bookArr));
-}
-
+import { bookDisplay, bookDisplayForUpdate, openAddBookDialog } from "./actions.js";
+window.addEventListener("load", () => {
+  let bookArr = JSON.parse(localStorage.getItem("books"));
+  if (!bookArr || bookArr == []) {
+    bookArr = jsonBooks["books"];
+    localStorage.setItem("books", JSON.stringify(bookArr));
+  }
+  
+ 
+})
 //מקבל רשימת ספרים ומציג אותה בצורה דינמית 
 
 const createBookList = () => {
-
   let bookArr = JSON.parse(localStorage.getItem("books"));
-  if(!bookArr||bookArr==[]){
-  bookArr = jsonBooks["books"];
-  localStorage.setItem("books", JSON.stringify(bookArr));
+
+  if (!bookArr || bookArr == []) {
+    bookArr = jsonBooks["books"];
+    localStorage.setItem("books", JSON.stringify(bookArr));
   }
-  
+
   let table = document.getElementById("table");
   console.log(bookArr);
 
@@ -44,13 +47,17 @@ const createBookList = () => {
     price.innerText = bookArr[i].price + " ₪";
     price.setAttribute("class", "price");
     tr.appendChild(price);
-
+    
+    
     //actions
     let readBtn = document.createElement("td");
     readBtn.innerText = "Read";
     readBtn.setAttribute("class", "read-btn");
     readBtn.setAttribute("id", bookArr[i].id);
-    readBtn.addEventListener("click",()=>{
+    readBtn.addEventListener("click", () => {
+      let newBookArr = JSON.parse(localStorage.getItem("books"));
+      if (newBookArr)
+        bookArr = newBookArr;
       localStorage.setItem("dispBook", JSON.stringify(bookArr[i]));
       bookDisplay()
     })
@@ -63,7 +70,7 @@ const createBookList = () => {
     updateBtn.addEventListener("click", () => {
       localStorage.setItem("dispBook", JSON.stringify(bookArr[i]));
       bookDisplayForUpdate();
-      
+
     })
     tr.appendChild(updateBtn);
 
@@ -74,11 +81,12 @@ const createBookList = () => {
     deleteBtn.addEventListener("click", () => {
       deleteBook(bookArr[i].id);
       tr.remove();
-      let dispBook=JSON.parse(localStorage.getItem("dispBook"));
-      if(dispBook.id==bookArr[i].id){
-      localStorage.removeItem("dispBook")
-      let display=document.getElementById("display-wrapper");
-      display.remove();}
+      let dispBook = JSON.parse(localStorage.getItem("dispBook"));
+      if (dispBook.id == bookArr[i].id) {
+        localStorage.removeItem("dispBook")
+        let display = document.getElementById("display-wrapper");
+        display.remove();
+      }
     })
     tr.appendChild(deleteBtn);
 
@@ -89,14 +97,14 @@ const createBookList = () => {
 window.addEventListener("load", createBookList)
 // אירועי לחיצה על פעולות
 //יציגו את הפונקציה הבאה:
-let addBookBtn=document.getElementById("add-book-btn")
-addBookBtn.addEventListener("click",openAddBookDialog)
-window.addEventListener("load", ()=>{
-  let item=JSON.parse(localStorage.getItem("dispBook"));
- if(item){
-   bookDisplay();
- }
- });
+let addBookBtn = document.getElementById("add-book-btn")
+addBookBtn.addEventListener("click", openAddBookDialog)
+window.addEventListener("load", () => {
+  let item = JSON.parse(localStorage.getItem("dispBook"));
+  if (item) {
+    bookDisplay();
+  }
+});
 
 
 //פונקציות להפעלה בעת אירוע
@@ -123,24 +131,8 @@ const updateBook = (bookId) => {
     Object.assign(item, newBookData);
   }
   localStorage.setItem("books", JSON.stringify(bookArr));
-
 }
 
 
-//לייצור אירוע של טריגר של הלוקלסטורג
-// function setItemWithEvent(key, value) {
-//   localStorage.setItem(key, value);
-//   // Dispatch a custom event when localStorage is updated
-//   const event = new Event('localStorageUpdated');
-//   window.dispatchEvent(event);
-// }
-
-// // Listener for custom localStorage change event
-// window.addEventListener('localStorageUpdated', function () {
-//   console.log('localStorage was updated in the same tab!');
-// });
-
-// // Example usage
-// setItemWithEvent('exampleKey', 'exampleValue');
 
 

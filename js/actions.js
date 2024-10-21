@@ -26,12 +26,21 @@ export const bookDisplay = () => {
     author.innerText = book.author;
     author.setAttribute("class", "display-author");
     wrapper.appendChild(author);
+  
+    let imageCell = document.createElement("td");
+    let img = document.createElement("img");
+    img.setAttribute("src", book.image); // URL to image
+    img.setAttribute("alt", book.title);
+    img.setAttribute("class", "book-image");
+    imageCell.appendChild(img);
+    wrapper.appendChild(imageCell);
+
 
     let price = document.createElement("h4");
     price.innerText = book.price + " ₪";
     price.setAttribute("class", "display-price");
     wrapper.appendChild(price);
-
+    
     let rateDiv = document.createElement("div");
     rateDiv.setAttribute("class", "rate-wrap")
     let decRateBtn = document.createElement("button");
@@ -54,72 +63,57 @@ export const bookDisplay = () => {
     incRateBtn.addEventListener("click", incRate);
 
     rateDiv.appendChild(incRateBtn);
-
-
-
-
     wrapper.appendChild(rateDiv);
-
     container.appendChild(wrapper);
 
 }
-
-//העלאת דירוג
-
+// Increase rate function
 export const incRate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     let bookArr = JSON.parse(localStorage.getItem("books"));
 
-    // יצירת מערך חדש תוך עדכון ה-rate של הספר המתאים
     let updatedBookArr = bookArr.map(item => {
         if (item.id == book.id && item.rate < 10) {
-            return { ...item, rate: item.rate + 1 }; // עדכון ה-rate של הספר
+            return { ...item, rate: item.rate + 1 };
         }
-        return item; // השארת שאר הספרים ללא שינוי
+        return item;
     });
 
-    // עדכון הספר המוצג בלוקל סטורג' עם הנתונים החדשים
+    // Save updated book array to localStorage
+    localStorage.setItem("books", JSON.stringify(updatedBookArr));
+    
+    // Find the updated book and display it
     let updatedBook = updatedBookArr.find(item => item.id == book.id);
     localStorage.setItem("dispBook", JSON.stringify(updatedBook));
 
-    // שמירת המערך החדש בלוקל סטורג'
-    localStorage.setItem("books", JSON.stringify(updatedBookArr));
-
-    // עדכון התצוגה של ה-rate בעמוד
+    // Update the displayed rate
     let rate = document.getElementById("rate-content");
     rate.innerText = updatedBook.rate;
 };
 
-//הורדת דירוג
-
-
+// Decrease rate function
 export const decRate = () => {
     let book = JSON.parse(localStorage.getItem("dispBook"));
     let bookArr = JSON.parse(localStorage.getItem("books"));
 
-    // יצירת מערך חדש תוך עדכון ה-rate של הספר המתאים
     let updatedBookArr = bookArr.map(item => {
         if (item.id == book.id && item.rate > 0) {
-            return { ...item, rate: item.rate - 1 }; // עדכון ה-rate של הספר
+            return { ...item, rate: item.rate - 1 };
         }
-        return item; // השארת שאר הספרים ללא שינוי
+        return item;
     });
 
-    // עדכון הספר המוצג בלוקל סטורג' עם הנתונים החדשים
+    // Save updated book array to localStorage
+    localStorage.setItem("books", JSON.stringify(updatedBookArr));
+
+    // Find the updated book and display it
     let updatedBook = updatedBookArr.find(item => item.id == book.id);
     localStorage.setItem("dispBook", JSON.stringify(updatedBook));
 
-    // שמירת המערך החדש בלוקל סטורג'
-    localStorage.setItem("books", JSON.stringify(updatedBookArr));
-
-    // עדכון התצוגה של ה-rate בעמוד
+    // Update the displayed rate
     let rate = document.getElementById("rate-content");
     rate.innerText = updatedBook.rate;
 };
-
-
-
-
 
 //תצוגת ספר כולל אפשרות עריכה
 export const bookDisplayForUpdate = () => {
@@ -344,3 +338,53 @@ export const openAddBookDialog = () => {
 
 
 }
+
+export const sortAscTitle=()=>{
+    let bookArr= JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a,b)=>a.title.localeCompare(b.title));
+    localStorage.setItem("books",JSON.stringify(bookArr));
+     //יצירת אירוע של עדכון local storage
+   const event = new Event('localStorageUpdated');
+   window.dispatchEvent(event);
+}
+
+export const sortDescTitle=()=>{
+    let bookArr= JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a,b)=>b.title.localeCompare(a.title));
+    localStorage.setItem("books",JSON.stringify(bookArr));
+    //יצירת אירוע של עדכון local storage
+    const event = new Event('localStorageUpdated');
+    window.dispatchEvent(event);
+}
+
+export const sortAscPrice=()=>{
+    let bookArr= JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a,b)=>a.price-b.price);
+    localStorage.setItem("books",JSON.stringify(bookArr));
+    //יצירת אירוע של עדכון local storage
+    const event = new Event('localStorageUpdated');
+    window.dispatchEvent(event);
+}
+
+export const sortDescPrice=()=>{
+    let bookArr= JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a,b)=>b.price-a.price);
+    localStorage.setItem("books",JSON.stringify(bookArr));
+    //יצירת אירוע של עדכון local storage
+    const event = new Event('localStorageUpdated');
+    window.dispatchEvent(event);
+}
+
+let btnSortAscPrice=document.getElementById("sort-asc");
+btnSortAscPrice.addEventListener("click",sortAscPrice);
+let btnSortDescPrice=document.getElementById("sort-desc");
+btnSortDescPrice.addEventListener("click",sortDescPrice);
+let btnSortAscString=document.getElementById("sort-asc-string");
+btnSortAscString.addEventListener("click",sortAscTitle);
+let btnSortDescString=document.getElementById("sort-desc-string");
+btnSortDescString.addEventListener("click",sortDescTitle);
+
+// Listener for custom localStorage change event
+window.addEventListener('localStorageUpdated', ()=>{
+    window.location.reload();
+});
