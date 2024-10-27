@@ -26,7 +26,7 @@ export const bookDisplay = () => {
     author.innerText = book.author;
     author.setAttribute("class", "display-author");
     wrapper.appendChild(author);
-  
+
     let imageCell = document.createElement("td");
     let img = document.createElement("img");
     img.setAttribute("src", book.image); // URL to image
@@ -40,7 +40,7 @@ export const bookDisplay = () => {
     price.innerText = book.price + " ₪";
     price.setAttribute("class", "display-price");
     wrapper.appendChild(price);
-    
+
     let rateDiv = document.createElement("div");
     rateDiv.setAttribute("class", "rate-wrap")
     let decRateBtn = document.createElement("button");
@@ -81,7 +81,7 @@ export const incRate = () => {
 
     // Save updated book array to localStorage
     localStorage.setItem("books", JSON.stringify(updatedBookArr));
-    
+
     // Find the updated book and display it
     let updatedBook = updatedBookArr.find(item => item.id == book.id);
     localStorage.setItem("dispBook", JSON.stringify(updatedBook));
@@ -220,20 +220,20 @@ export const bookDisplayForUpdate = () => {
 export const openAddBookDialog = () => {
     let dialog = document.createElement("dialog");
     dialog.setAttribute("id", "add-book-dialog");
- 
- // Create close button (X)
- let closeBtn = document.createElement("button");
- closeBtn.innerText = "×"; // The "X" symbol
- closeBtn.setAttribute("id", "close-btn");
- closeBtn.addEventListener("click", () => {
-     dialog.close(); // Close the dialog when "X" is clicked
-     dialog.remove(); // Remove dialog from the DOM after closing
- });
+
+    // Create close button (X)
+    let closeBtn = document.createElement("button");
+    closeBtn.innerText = "×"; // The "X" symbol
+    closeBtn.setAttribute("id", "close-btn");
+    closeBtn.addEventListener("click", () => {
+        dialog.close(); // Close the dialog when "X" is clicked
+        dialog.remove(); // Remove dialog from the DOM after closing
+    });
 
     let form = document.createElement("form");
     form.setAttribute("method", "dialog");
     form.setAttribute("id", "add-book-form");
- 
+
     dialog.appendChild(closeBtn);
 
     // Title input
@@ -294,100 +294,101 @@ export const openAddBookDialog = () => {
     dialog.showModal();
 
     form.addEventListener("submit", (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    // קריאת ערכי הטופס
-    const title = document.getElementById("book-title").value;
-    const author = document.getElementById("book-author").value;
-    const price = parseFloat(document.getElementById("book-price").value);
-    const rate = parseInt(document.getElementById("book-rate").value);
-    const imgFile = document.getElementById("book-img").files[0];
+        // קריאת ערכי הטופס
+        const title = document.getElementById("book-title").value;
+        const author = document.getElementById("book-author").value;
+        const price = parseFloat(document.getElementById("book-price").value);
+        const rate = parseInt(document.getElementById("book-rate").value);
+        const imgFile = document.getElementById("book-img").files[0];
 
-    // פונקציה להוספת הספר החדש
-    const addBook = (imgBase64 = null) => {
-        let bookArr = JSON.parse(localStorage.getItem("books")) || [];
-        // יצירת אובייקט ספר חדש
-        let newBook = {
-            id: bookArr.length + 1, // מזהה ספר חדש
-            title: title,
-            author: author,
-            price: price,
-            rate: rate,
-            img: imgBase64, // תמונה כ-Base64 אם קיימת
+        // פונקציה להוספת הספר החדש
+        const addBook = (imgBase64 = null) => {
+            let bookArr = JSON.parse(localStorage.getItem("books")) || [];
+            // יצירת אובייקט ספר חדש
+            let maxId = Math.max(...bookArr.map(book => book.id));
+            let newBook = {
+                id: maxId + 1, // מזהה ספר חדש
+                title: title,
+                author: author,
+                price: price,
+                rate: rate,
+                img: imgBase64, // תמונה כ-Base64 אם קיימת
+            };
+            bookArr.push(newBook);
+            localStorage.setItem("books", JSON.stringify(bookArr));
+            dialog.close();
+            form.reset();
+            alert("Book added successfully!");
+            window.location.reload();
         };
-        bookArr.push(newBook);
-        localStorage.setItem("books", JSON.stringify(bookArr));
-        dialog.close();
-        form.reset();
-        alert("Book added successfully!");
-        window.location.reload();
-    };
 
-    // קריאת הקובץ אם קיים, אחרת קריאה להוספת הספר ללא תמונה
-    if (imgFile) {
-        const reader = new FileReader();
-        reader.onload = () => {
-            const imgBase64 = reader.result;
-            addBook(imgBase64);
-        };
-        reader.readAsDataURL(imgFile);
-    } else {
-        addBook(); // הוספה ללא תמונה
-    }
-});
+        // קריאת הקובץ אם קיים, אחרת קריאה להוספת הספר ללא תמונה
+        if (imgFile) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imgBase64 = reader.result;
+                addBook(imgBase64);
+            };
+            reader.readAsDataURL(imgFile);
+        } else {
+            addBook(); // הוספה ללא תמונה
+        }
+    });
 
 
 }
 
 //פונקציות למיון הטבלה, כל פונקציה ע"פ ערך מסוים
 //מיון עולה ע"פ שם ספר
-export const sortAscTitle=()=>{
-    let bookArr= JSON.parse(localStorage.getItem("books"));
-    bookArr.sort((a,b)=>a.title.localeCompare(b.title));
-    localStorage.setItem("books",JSON.stringify(bookArr));
-     //יצירת אירוע של עדכון local storage
-   const event = new Event('localStorageUpdated');
-   window.dispatchEvent(event);
+export const sortAscTitle = () => {
+    let bookArr = JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a, b) => a.title.localeCompare(b.title));
+    localStorage.setItem("books", JSON.stringify(bookArr));
+    //יצירת אירוע של עדכון local storage
+    const event = new Event('localStorageUpdated');
+    window.dispatchEvent(event);
 }
 //מיון יורד ע"פ שם ספר
-export const sortDescTitle=()=>{
-    let bookArr= JSON.parse(localStorage.getItem("books"));
-    bookArr.sort((a,b)=>b.title.localeCompare(a.title));
-    localStorage.setItem("books",JSON.stringify(bookArr));
+export const sortDescTitle = () => {
+    let bookArr = JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a, b) => b.title.localeCompare(a.title));
+    localStorage.setItem("books", JSON.stringify(bookArr));
     //יצירת אירוע של עדכון local storage
     const event = new Event('localStorageUpdated');
     window.dispatchEvent(event);
 }
 //מיון עולה ע"פ מחיר
-export const sortAscPrice=()=>{
-    let bookArr= JSON.parse(localStorage.getItem("books"));
-    bookArr.sort((a,b)=>a.price-b.price);
-    localStorage.setItem("books",JSON.stringify(bookArr));
+export const sortAscPrice = () => {
+    let bookArr = JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a, b) => a.price - b.price);
+    localStorage.setItem("books", JSON.stringify(bookArr));
     //יצירת אירוע של עדכון local storage
     const event = new Event('localStorageUpdated');
     window.dispatchEvent(event);
 }
 //מיון יורד ע"פ מחיר
-export const sortDescPrice=()=>{
-    let bookArr= JSON.parse(localStorage.getItem("books"));
-    bookArr.sort((a,b)=>b.price-a.price);
-    localStorage.setItem("books",JSON.stringify(bookArr));
+export const sortDescPrice = () => {
+    let bookArr = JSON.parse(localStorage.getItem("books"));
+    bookArr.sort((a, b) => b.price - a.price);
+    localStorage.setItem("books", JSON.stringify(bookArr));
     //יצירת אירוע של עדכון local storage
     const event = new Event('localStorageUpdated');
     window.dispatchEvent(event);
 }
 
 //הוספת אירועי לחיצה לכפתורי המיון וקריאה לפונקציית המיון בעת הלחיצה
-let btnSortAscPrice=document.getElementById("sort-asc");
-btnSortAscPrice.addEventListener("click",sortAscPrice);
-let btnSortDescPrice=document.getElementById("sort-desc");
-btnSortDescPrice.addEventListener("click",sortDescPrice);
-let btnSortAscString=document.getElementById("sort-asc-string");
-btnSortAscString.addEventListener("click",sortAscTitle);
-let btnSortDescString=document.getElementById("sort-desc-string");
-btnSortDescString.addEventListener("click",sortDescTitle);
+let btnSortAscPrice = document.getElementById("sort-asc");
+btnSortAscPrice.addEventListener("click", sortAscPrice);
+let btnSortDescPrice = document.getElementById("sort-desc");
+btnSortDescPrice.addEventListener("click", sortDescPrice);
+let btnSortAscString = document.getElementById("sort-asc-string");
+btnSortAscString.addEventListener("click", sortAscTitle);
+let btnSortDescString = document.getElementById("sort-desc-string");
+btnSortDescString.addEventListener("click", sortDescTitle);
 
 //הוספת האזנה לעדכון הלוקל סטורג וטעינה מחדש של הדף בעת העדכון
-window.addEventListener('localStorageUpdated', ()=>{
+window.addEventListener('localStorageUpdated', () => {
     window.location.reload();
 });

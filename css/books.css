@@ -24,9 +24,12 @@ body {
     bottom: 0;
     width: 100%;
     height: auto;
-    margin: 0;
+    margin: 0%;
 }
 
+#header svg path {
+    margin-top: 0%;
+}
 #add-book-btn {
     z-index: 1;
     /* Ensures the button is on top of the SVG */
@@ -245,13 +248,35 @@ button[type="submit"]:hover {
 
 }
 
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 1100px) {
     #header {
-        height: 15%;
+        height: 35%;
     }
 
     #add-book-btn {
-        margin-top: 8%;
+        margin-top: 13%;
+    }
+
+}
+
+@media only screen and (max-width: 880px) {
+    #header {
+        height: 25%;
+    }
+
+    #add-book-btn {
+        margin-top: 15%;
+    }
+
+}
+
+@media only screen and (max-width: 620px) {
+    #header {
+        height: 20%;
+    }
+
+    #add-book-btn {
+        margin-top: 20%;
     }
 
 }
@@ -263,7 +288,7 @@ button[type="submit"]:hover {
     }
 
     #add-book-btn {
-        margin-top: 18%;
+        margin-top: 25%;
     }
 
     #container {
@@ -272,15 +297,16 @@ button[type="submit"]:hover {
         padding: 0px;
     }
 
-    
-#display-wrapper {
-    float: right;
-    width: 90%;
-    margin: 5%;
 
-}
-#footer {
-    height: 10%;
-}
+    #display-wrapper {
+        float: right;
+        width: 90%;
+        margin: 5%;
+
+    }
+
+    #footer {
+        height: 10%;
+    }
 
 }

@@ -112,7 +112,7 @@ addBookBtn.addEventListener("click", openAddBookDialog)
 
 //פונקציה למחיקת ספר ממערך
 const deleteBook = (bookId) => {
-  bookArr = JSON.parse(localStorage.getItem("books"));
+ let bookArr = JSON.parse(localStorage.getItem("books"));
   let newBookArr = bookArr.filter(item => item.id != bookId);
   localStorage.setItem("books", JSON.stringify(newBookArr));
 
@@ -131,6 +131,7 @@ const updateBook = (bookId) => {
   }
   localStorage.setItem("books", JSON.stringify(bookArr));
 }
+
 
 
 
